@@ -117,6 +117,10 @@ namespace Dapper
 
         public void BeginTransaction(IsolationLevel isolation = IsolationLevel.ReadCommitted)
         {
+            if (_connection.State == 0)
+            {
+                _connection.Open();
+            }
             _transaction = _connection.BeginTransaction(isolation);
         }
 
